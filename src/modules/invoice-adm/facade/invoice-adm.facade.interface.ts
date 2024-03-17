@@ -28,7 +28,7 @@ export interface FindInvoiceFacadeOutputDto {
     updatedAt: Date;
 }
 
-export default interface InvoiceFacadeInterface {
+export default interface InvoiceAdmFacadeInterface {
   add(input: GenerateInvoiceFacadeInputDto): Promise<void>;
   find(input: FindInvoiceFacadeInputDto): Promise<FindInvoiceFacadeOutputDto>;
 }

@@ -1,11 +1,7 @@
 import { Sequelize } from "sequelize-typescript";
 import InvoiceItemModel from "../repository/invoice-item.model";
 import InvoiceModel from "../repository/invoice.model";
-import InvoiceRepository from "../repository/invoice.repository";
-import GenerateInvoiceUseCase from "../usecase/generate-invoice/generate-invoice.usecase";
-import FindInvoiceUseCase from "../usecase/find-invoice/find-invoice.usecase";
-import InvoiceFacade from "./invoice.facade";
-import InvoiceFacadeFactory from "../factory/invoice.facade.factory";
+import InvoiceAdmFacadeFactory from "../factory/invoice-adm.facade.factory";
 import Address from "../../@shared/domain/value-object/address";
 
 
@@ -31,12 +27,7 @@ describe("Invoice Facade test", () => {
 
   it("should generate an invoice", async () => {
 
-    const repository = new InvoiceRepository()
-    const addUsecase = new GenerateInvoiceUseCase(repository)
-    const facade = new InvoiceFacade({
-      addUsecase: addUsecase,
-      findUsecase: undefined,
-    })
+    const facade = InvoiceAdmFacadeFactory.create()
 
     const invoiceItems = [
         {
@@ -77,7 +68,7 @@ describe("Invoice Facade test", () => {
 
   it("should find an invoice", async () => {
 
-    const facade = InvoiceFacadeFactory.create()
+    const facade = InvoiceAdmFacadeFactory.create()
 
     const invoiceItems = [
         {
