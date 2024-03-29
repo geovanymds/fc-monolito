@@ -1,6 +1,5 @@
 import { app, sequelize } from "../../../../express"
 import request from "supertest"
-import Address from "../../../@shared/domain/value-object/address";
 
 describe("E2E test for client", () => {
     beforeEach(async () => {
@@ -18,14 +17,14 @@ describe("E2E test for client", () => {
                 name: "Test name",
                 email: "test@test.com",
                 document: "test document",
-                address: new Address(
-                    "test street",
-                    "test number",
-                    "test complement",
-                    "test city",
-                    "test state",
-                    "test zip code"
-                )
+                address: {
+                    street: "test street",
+                    number: "test number",
+                    complement: "test complement",
+                    city: "test city",
+                    state: "test state",
+                    zipCode: "test zip code"
+                }
             });
 
         expect(response.status).toBe(200)
