@@ -1,6 +1,6 @@
 import Address from "../../../@shared/domain/value-object/address";
 
-type InvoiceItem = {
+export type InvoiceItem = {
     id?: string;
     name: string;
     price: number;

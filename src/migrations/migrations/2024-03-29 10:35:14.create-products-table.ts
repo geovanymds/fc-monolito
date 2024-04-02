@@ -28,11 +28,11 @@ export const up: MigrationFn<Sequelize> = async ({ context: sequelize }) => {
         type: DataTypes.NUMBER,
         allowNull: true
     },
-    createdAt: {
+    created_at: {
         type: DataTypes.DATE,
-        allowNull: false
+        allowNull: false,
     },
-    updatedAt: {
+    updated_at: {
         type: DataTypes.DATE,
         allowNull: false
     }

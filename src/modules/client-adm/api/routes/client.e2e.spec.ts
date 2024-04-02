@@ -1,14 +1,36 @@
-import { app, sequelize } from "../../../../express"
+import { Sequelize } from "sequelize-typescript"
+import { app } from "../../../../express"
+import { Umzug } from "umzug"
+import { migrator } from "../../../../migrations/config-migrations/migrator"
 import request from "supertest"
 
-describe("E2E test for client", () => {
-    beforeEach(async () => {
-        await sequelize.sync({ force: true })
-    });
+import { ClientModel } from "../../repository/client.model"
 
-    afterAll(async () => {
-        await sequelize.close();
-    });
+describe("E2E test for client", () => {
+    let sequelize: Sequelize
+  
+    let migration: Umzug<any>;
+  
+    beforeEach(async () => {
+      sequelize = new Sequelize({
+        dialect: 'sqlite',
+        storage: ':memory:',
+        logging: false
+      })
+      
+      sequelize.addModels([ClientModel])
+      migration = migrator(sequelize)
+      await migration.up()
+    })
+  
+    afterEach(async () => {
+      if (!migration || !sequelize) {
+        return 
+      }
+      migration = migrator(sequelize)
+      await migration.down()
+      await sequelize.close()
+    })
 
     it("should create a client", async () => {
         const response = await request(app)

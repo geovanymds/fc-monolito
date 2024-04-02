@@ -8,8 +8,6 @@ export const clientRoute = express.Router();
 clientRoute.post("/", async (req: Request, res: Response) => {
     const usecase = new AddClientUseCase(new ClientRepository());
 
-    console.log(req.body)
-
     try {
 
         const addClientDto = {
